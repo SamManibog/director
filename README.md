@@ -28,11 +28,13 @@ Installation example for Lazy.nvim
     "SamManibog/director",
     dependencies = { "SamManibog/oneup" },
     lazy = false,
-    config = {
-        actions = {
-            ... -- Required field
+    config = function() -- Must be a callback
+        require("director").setup({
+            actions = {
+                ... -- Required fields
+            })
         }
-    }
+    end
 }
 ```
 
