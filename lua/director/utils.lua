@@ -66,29 +66,31 @@ function M.generateCommand(head, config, fields)
             generate = true
         end
 
-        local value = config[field.name]
+        if generate then
+            local value = config[field.name]
 
-        local pre = field.arg_prefix or " "
-        local post = field.arg_postfix or ""
+            local pre = field.arg_prefix or " "
+            local post = field.arg_postfix or ""
 
-        if field.custom_cmd ~= nil then
-            cmd = cmd.." "..pre..field.custom_cmd(value)..post
-        elseif field.type == "list" and field.list_affix then
-            for _, entry in ipairs(value) do
-                cmd = cmd.." "..pre..entry..post
+            if field.custom_cmd ~= nil then
+                cmd = cmd.." "..pre..field.custom_cmd(value)..post
+            elseif field.type == "list" and field.list_affix then
+                for _, entry in ipairs(value) do
+                    cmd = cmd.." "..pre..entry..post
+                end
+            elseif field.type == "list" then
+                cmd = cmd.." "..pre
+                for _, entry in ipairs(value) do
+                    cmd = cmd.." "..entry
+                end
+                cmd = cmd..post
+            elseif field.type == "boolean" and field.bool_display ~= nil then
+                if value == field.bool_display then
+                    cmd = cmd.." "..pre..post
+                end
+            else
+                cmd = cmd.." "..pre..tostring(value)..post
             end
-        elseif field.type == "list" then
-            cmd = cmd.." "..pre
-            for _, entry in ipairs(value) do
-                cmd = cmd.." "..entry
-            end
-            cmd = cmd..post
-        elseif field.type == "boolean" and field.bool_display ~= nil then
-            if value == field.bool_display then
-                cmd = cmd.." "..pre..post
-            end
-        else
-            cmd = cmd.." "..pre..tostring(value)..post
         end
     end
 
