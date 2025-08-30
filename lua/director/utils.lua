@@ -66,8 +66,11 @@ function M.generateCommand(head, config, fields)
             generate = true
         end
 
+        local value = config[field.name]
+
+        if tostring(value) == "" then generate = false end
+
         if generate then
-            local value = config[field.name]
 
             local pre = field.arg_prefix or " "
             local post = field.arg_postfix or ""
