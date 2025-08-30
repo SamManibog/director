@@ -16,6 +16,26 @@ See Configuration.md and GuidedExample.md to learn how to write your own actions
 
 ## Installation
 
+Director has only one dependency, a ui library that I created called oneup. Be sure to install that alongside
+Director.
+
+### Lazy
+
+Installation example for Lazy.nvim
+
+```lua
+{
+    "SamManibog/director",
+    dependencies = { "SamManibog/oneup" },
+    lazy = false,
+    config = {
+        actions = {
+            ... -- Required field
+        }
+    }
+}
+```
+
 ## Usage Guide
 
 ### Setup
