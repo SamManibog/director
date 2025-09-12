@@ -201,7 +201,7 @@ local function allocateTerminal(name)
 
     vim.api.nvim_create_autocmd("BufWipeout", {
         group = vim.api.nvim_create_augroup("director-terminal", { clear = true}),
-        buffer = term.job,
+        buffer = term.buffer,
         callback = function()
             print("Terminal '"..name.."' killed.")
             terminals[name] = nil
